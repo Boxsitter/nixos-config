@@ -14,14 +14,17 @@
 
   # Bootloader settings
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    device = "nodev";
-    useOSProber = true; # Enable detection of Windows
-  };
-  boot.loader.systemd-boot.enable = false;
+  boot.loader.systemd-boot.enable = true;
+
+  #  This stuff may be unnecessary
+  #  boot.loader.efi.efiSysMountPoint = "/boot";
+  #  boot.loader.grub = {
+  #    enable = true;
+  #    efiSupport = true;
+  #    device = "nodev";
+  #    useOSProber = true; # Enable detection of Windows
+  #  };
+
 
   hardware.opengl = {
     enable = true;
@@ -56,11 +59,15 @@
   # Define your user account. Replace "leyton" and adjust groups as needed
   users.users.leyton = {
     isNormalUser = true;
+    description = "Leyton Houck";
     home = "/home/leyton";
     extraGroups = [ "wheel" "networkmanager" "video" "input" ]; # Provides sudo and other privileges
     shell = pkgs.fish;
     initialPassword = "7574";
   };
+
+  # Enable auto login
+  services.getty.autologinUser = "leyton";
 
   #############################
   # Package and Environment Settings
