@@ -134,11 +134,9 @@
   # Programs
   #############################
 
-  # Enable Firefox web browser
-  programs.firefox.enable = true;
-
-  # Enable Hyprland support
-  programs.hyprland.enable = true;
+  programs.fish.enable = true;          # Fish shell
+  programs.hyprland.enable = true;      # Hyprland support
+  programs.firefox.enable = true;       # Firefox browser
 
   #############################
   # Hyprland Configuration
