@@ -5,6 +5,8 @@
 { config, lib, pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
+
   #############################
   # Basic Imports, Bootloader, and Graphics Driver Settings
   #############################
@@ -26,9 +28,25 @@
   #  };
 
 
+  # NVIDIA driver configuration
+  boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+  boot.extraModulePackages = [ pkgs.nvidiaPackages.stable ];  # Or replace 'stable' with 'studio' if needed
+
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ pkgs.nvidiaPackages.stable ];
+    extraPackages = with pkgs; [ pkgs.nvidiaPackages.stable ];  # Use 'studio' here if you want Studio drivers
+  };
+
+  # For systems using X11; if you're strictly on Wayland you may omit this line:
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;             # Set to true if you have a Turing+ GPU and want open drivers
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   #############################
@@ -72,8 +90,6 @@
   #############################
   # Package and Environment Settings
   #############################
-
-  nixpkgs.config.allowUnfree = true;
 
   # System-wide packages
   environment.systemPackages = with pkgs; [
