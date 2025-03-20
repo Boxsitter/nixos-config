@@ -30,21 +30,18 @@
 
   # NVIDIA driver configuration
   boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-  boot.extraModulePackages = [ pkgs.nvidiaPackages.stable ];  # Or replace 'stable' with 'studio' if needed
+  boot.extraModulePackages = [ config.boot.kernelPackages.nvidiaPackages.stable ];
 
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ pkgs.nvidiaPackages.stable ];  # Use 'studio' here if you want Studio drivers
+    extraPackages = with pkgs; [ config.boot.kernelPackages.nvidiaPackages.stable ];
   };
-
-  # For systems using X11; if you're strictly on Wayland you may omit this line:
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = false;             # Set to true if you have a Turing+ GPU and want open drivers
+    open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
