@@ -26,7 +26,7 @@
   #  };
 
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [ pkgs.nvidiaPackages.stable ];
   };
@@ -72,6 +72,8 @@
   #############################
   # Package and Environment Settings
   #############################
+
+  nixpkgs.config.allowUnfree = true;
 
   # System-wide packages
   environment.systemPackages = with pkgs; [
