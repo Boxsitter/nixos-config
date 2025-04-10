@@ -78,7 +78,7 @@
 
   # -- Nix Settings --
   # Enable experimental features needed for Flakes.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" ];
   # Allow installation of non-free packages (like Nvidia drivers).
   nixpkgs.config.allowUnfree = true;
   # Optional: Automatic garbage collection to clean up old Nix store paths.
