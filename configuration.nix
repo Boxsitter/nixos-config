@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
+
   # -- System Boot Loader (GRUB for Dual-Booting) --
   boot.loader = {
     # Use GRUB as the boot loader.
