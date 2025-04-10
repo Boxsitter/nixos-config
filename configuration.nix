@@ -105,8 +105,9 @@
     # Add fish here so it's available system-wide, even if not default for root
     fish
     neofetch
-    # Add NetworkManager applet if you plan to use a minimal WM/DE without one built-in
-    # networkmanagerapplet
+    eza
+    starship
+
   ];
 
   # -- Shell --
