@@ -3,8 +3,7 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix # This path is relative to configuration.nix
+    ../hardware-configuration.nix
   ];
 
   # --- System Boot Loader (GRUB) ---
