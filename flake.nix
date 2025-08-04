@@ -4,7 +4,8 @@
   # --- Flake Inputs ---
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # Add other inputs here, e.g., home-manager
+    # --- ADD THIS INPUT ---
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   # --- Flake Outputs ---
@@ -16,6 +17,8 @@
         inherit inputs;
       };
       modules = [
+        # --- ADD THIS LINE TO APPLY THE THEME ---
+        inputs.catppuccin.nixosModules.catppuccin
         # Main entry point to your system configuration
         /etc/nixos/configuration.nix
       ];

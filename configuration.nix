@@ -9,9 +9,18 @@
     /etc/nixos/modules/shell/fish.nix
 
     # Import the GUI configuration (Hyprland)
-    # You can comment out this line to build a headless system
-#    /etc/nixos/modules/gui/hyprland.nix
+    /etc/nixos/modules/gui/hyprland.nix
+
+    # Import the Kitty terminal configuration
+    /etc/nixos/modules/gui/kitty.nix
   ];
+
+  # Set the flavor system-wide for other modules to use
+  catppuccin.flavor = "macchiato";
+
+  # --- ADD THIS LINE ---
+  # This enables Catppuccin theming for the TTY console.
+  catppuccin.console = true;
 
   # Bootloader configuration remains here as it's fundamental
   boot.loader.grub = {

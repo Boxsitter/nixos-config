@@ -7,7 +7,6 @@
 #  environment.systemPackages = with pkgs; [
 #    hyprland
 #    xdg-desktop-portal-hyprland
-#    kitty
 #    rofi
 #    waybar
 #    mako
