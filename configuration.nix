@@ -5,22 +5,9 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
-  # -- System Boot Loader (GRUB for Dual-Booting) --
   boot.loader = {
-    # Use GRUB as the boot loader.
-    grub = {
-      enable = true;
-      device = "nodev"; # IMPORTANT: Verify this is correct for your system if issues arise.
-      # Install GRUB to the EFI System Partition (ESP).
-      efiSupport = true;
-      # Enable os-prober to detect other operating systems (like Windows).
-      # Requires `os-prober` package, which is added automatically when true.
-      useOSProber = true;
-    };
-    # Allow NixOS to manage EFI boot variables.
+    systemd-boot.enable = true; # Enable systemd-boot
     efi.canTouchEfiVariables = true;
-    # Disable systemd-boot since we are using GRUB.
-    systemd-boot.enable = false;
   };
 
   # -- Networking (WiFi via NetworkManager) --
