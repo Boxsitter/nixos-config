@@ -8,9 +8,6 @@
     # Import shell-specific configurations
     /etc/nixos/modules/shell/fish.nix
 
-    # Import the GUI configuration (Hyprland)
-    /etc/nixos/modules/gui/hyprland.nix
-
     # Import the Kitty terminal configuration
     /etc/nixos/modules/gui/kitty.nix
   ];
