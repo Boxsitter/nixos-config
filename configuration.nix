@@ -3,14 +3,14 @@
 {
   imports = [
     # Import the core system configuration
-    ./modules/core.nix
+    /etc/nixos/modules/core.nix
 
     # Import shell-specific configurations
-    ./modules/shell/fish.nix
+    /etc/nixos/modules/shell/fish.nix
 
     # Import the GUI configuration (Hyprland)
     # You can comment out this line to build a headless system
-    ./modules/gui/hyprland.nix
+#    /etc/nixos/modules/gui/hyprland.nix
   ];
 
   # Bootloader configuration remains here as it's fundamental

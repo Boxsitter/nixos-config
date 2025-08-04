@@ -17,7 +17,7 @@
       };
       modules = [
         # Main entry point to your system configuration
-        ./configuration.nix
+        /etc/nixos/configuration.nix
       ];
     };
   };
