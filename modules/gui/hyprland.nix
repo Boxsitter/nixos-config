@@ -1,3 +1,4 @@
+# ./modules/gui/hyprland.nix
 { pkgs, ... }:
 
 let
@@ -16,7 +17,9 @@ in {
     libnotify
     wl-clipboard
     playerctl
-    polkit-kde-agent
+    # --- FIX START ---
+    kdePackages.polkit-kde-agent-1 # Use the new, correct package name
+    # --- FIX END ---
   ];
 
   programs.hyprland.enable = true;
@@ -26,8 +29,6 @@ in {
     "xdg/hypr/hyprland.conf".source = "${cfgDir}/hyprland.conf";
     "xdg/hypr/keybindings.conf".source = "${cfgDir}/keybindings.conf";
     "xdg/hypr/nvidia.conf".source = "${cfgDir}/nvidia.conf";
-
-    # Optional (add if/when you include these)
     "xdg/hypr/monitors.conf".source = "${cfgDir}/monitors.conf";
     "xdg/hypr/windowrules.conf".source = "${cfgDir}/windowrules.conf";
   };
