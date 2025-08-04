@@ -5,9 +5,9 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
-  boot.loader = {
-    systemd-boot.enable = true; # Enable systemd-boot
-    efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/sda";
   };
 
   # -- Networking (WiFi via NetworkManager) --
