@@ -9,7 +9,7 @@
     /etc/nixos/modules/shell/fish.nix
 
     # Import the Kitty terminal configuration
-    /etc/nixos/modules/gui/kitty.nix
+    /etc/nixos/modules/shell/kitty.nix
   ];
 
   # Set the flavor system-wide for other modules to use
