@@ -9,12 +9,14 @@
   ];
 
   # 2. Enable and configure the Kitty terminal.
-  programs.kitty = {
-    enable = true;
+  # We enable the program and then set its sub-options individually.
+  programs.kitty.enable = true;
+
     # 3. Use the catppuccin-nix module to apply the theme.
-    theme = "Macchiato"; # Can be "Latte", "Frappe", "Macchiato", or "Mocha"
+  programs.kitty.theme = "Macchiato"; # Can be "Latte", "Frappe", "Macchiato", or "Mocha"
+
     # 4. Set the font and other custom settings.
-    settings = {
+  programs.kitty.settings = {
       font_family = "JetBrainsMono Nerd Font";
       font_size = 14;
       # Macchiato-specific background opacity
@@ -23,5 +25,4 @@
       # scrollback_lines = 10000;
       # enable_audio_bell = false;
     };
-  };
 }
