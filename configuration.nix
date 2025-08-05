@@ -2,24 +2,19 @@
 
 {
   imports = [
-    # Import the core system configuration
-    /etc/nixos/modules/core.nix
-
-    # Import shell-specific configurations
-    /etc/nixos/modules/shell/fish.nix
-
-    # Import the Kitty terminal configuration
-    /etc/nixos/modules/shell/kitty.nix
+    # Using relative paths makes your configuration portable.
+    ./modules/core.nix
+    ./modules/shell/fish.nix
+    ./modules/gui/kitty.nix # Corrected path to be in modules/gui
   ];
 
-  # Set the flavor system-wide for other modules to use
+  # Set the flavor system-wide for other Catppuccin modules to use
   catppuccin.flavor = "macchiato";
 
-  # --- ADD THIS LINE ---
-  # This enables Catppuccin theming for the TTY console.
+  # Enable Catppuccin theming for the TTY console
   catppuccin.console = true;
 
-  # Bootloader configuration remains here as it's fundamental
+  # Bootloader configuration
   boot.loader.grub = {
     enable = true;
     device = "/dev/sda"; # Or "nodev" for EFI

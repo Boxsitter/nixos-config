@@ -2,15 +2,14 @@
 { config, pkgs, ... }:
 
 {
+  # This import remains an absolute path, which is correct.
+  # hardware-configuration.nix is machine-specific and not part of your portable config.
   imports = [
-    # This file is machine-specific and should be generated on the target system
     /etc/nixos/hardware-configuration.nix
   ];
 
-  # --- Networking ---
   networking.networkmanager.enable = true;
 
-  # --- Hardware (Nvidia GPU) ---
   hardware.nvidia = {
     open = false;
     modesetting.enable = true;
@@ -19,24 +18,21 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # --- Core System Settings ---
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "us";
 
-  # --- User Account ---
   users.users.leyton = {
     isNormalUser = true;
     description = "Leyton Houck";
     home = "/home/leyton";
     extraGroups = [ "wheel" "networkmanager" "video" "input" ];
-    shell = pkgs.fish; # This sets fish as the default shell for the user
-    initialPassword = "7574"; # CHANGE THIS IMMEDIATELY!
+    shell = pkgs.fish;
+    initialPassword = "7574";
   };
 
   security.sudo.wheelNeedsPassword = true;
 
-  # --- Nix Settings ---
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
   nix.gc = {
@@ -45,7 +41,7 @@
     options = "--delete-older-than 7d";
   };
 
-  # --- Essential System-Wide Packages ---
+  # Essential packages are kept here. fish-related packages were moved.
   environment.systemPackages = with pkgs; [
     git nano wget pciutils usbutils fish neofetch eza starship gcc mono jdk python3 racket bc
   ];
