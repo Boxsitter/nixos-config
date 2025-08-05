@@ -7,15 +7,24 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
-  # Set a modern font for the TTY console
-  console.font = "ter-u16n";
+  # Install and set the Terminus font for console
+  console = {
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-u16n.psf.gz";
+    packages = with pkgs; [ terminus_font ];
+    
+    # Set the console colors directly through the NixOS console module
+    # instead of kernel parameters
+    colors = [
+      "24273a" "f38ba8" "a6e3a1" "f9e2af" 
+      "89dceb" "f5c2e7" "94e2d5" "cba6f7"
+      "9398b3" "f38ba8" "a6e3a1" "f9e2af" 
+      "89dceb" "f5c2e7" "94e2d5" "cad3f5"
+    ];
+  };
 
-  # Set the 16 TTY colors to the Catppuccin Macchiato palette
-  # This is done via kernel parameters
+  # Remove the color-related kernel parameters
   boot.kernelParams = [
-    "vt.default_red=0x24,0xf3,0xa6,0xf9,0x89,0xf5,0x94,0xcb,0x93,0xf3,0xa6,0xf9,0x89,0xf5,0x94,0xca"
-    "vt.default_grn=0x27,0x8b,0xe3,0xe2,0xdc,0xc2,0xe2,0xa6,0x98,0x8b,0xe3,0xe2,0xdc,0xc2,0xe2,0xd3"
-    "vt.default_blu=0x3a,0xa8,0xa1,0xaf,0xeb,0xe7,0xd5,0xf7,0x93,0xa8,0xa1,0xaf,0xeb,0xe7,0xd5,0xf5"
+    # Other kernel parameters can stay here
   ];
 
   networking.networkmanager.enable = true;
