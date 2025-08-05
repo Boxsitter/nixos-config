@@ -5,7 +5,7 @@
     # Using relative paths makes your configuration portable.
     ./modules/core.nix
     ./modules/shell/fish.nix
-    ./modules/gui/kitty.nix # Corrected path to be in modules/gui
+    ./modules/shell/kitty.nix # Corrected path to be in modules/gui
   ];
 
   # Set the flavor system-wide for other Catppuccin modules to use

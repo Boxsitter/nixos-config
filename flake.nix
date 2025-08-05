@@ -14,7 +14,7 @@
         inherit inputs;
       };
       modules = [
-        inputs.catppuccin.nixosModules.catppuccin,
+        inputs.catppuccin.nixosModules.catppuccin
         # --- CHANGE THIS LINE ---
         ./configuration.nix # Use the relative path to the file
       ];
