@@ -21,6 +21,4 @@
 
   # Set the system's state version
   system.stateVersion = "24.11";
-
-  # test
 }
