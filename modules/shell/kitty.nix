@@ -2,9 +2,9 @@
 { pkgs, ... }:
 
 {
-  # Install JetBrains Mono Nerd Font
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+  # Install JetBrains Mono Nerd Font using the new attribute set
+  fonts.packages = [
+    pkgs.nerd-fonts.JetBrainsMono
   ];
 
   # Just install Kitty system-wide

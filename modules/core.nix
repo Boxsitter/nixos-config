@@ -7,22 +7,20 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
-  # Install and set the Terminus font for console
+  # Configure console with a modern font and Catppuccin theme
   console = {
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-u16n.psf.gz";
+    # Use Terminus font which is a standard, reliable console font
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-v20n.psf.gz";  # Larger size (20) for better readability
     packages = with pkgs; [ terminus_font ];
     
-    # Set the console colors directly through the NixOS console module
-    # instead of kernel parameters
-    colors = [
-      "24273a" "f38ba8" "a6e3a1" "f9e2af" 
-      "89dceb" "f5c2e7" "94e2d5" "cba6f7"
-      "9398b3" "f38ba8" "a6e3a1" "f9e2af" 
-      "89dceb" "f5c2e7" "94e2d5" "cad3f5"
-    ];
+    # Enable Catppuccin theme for console
+    catppuccin = {
+      enable = true;
+      # The flavor is already set in configuration.nix
+    };
   };
 
-  # Remove the color-related kernel parameters
+  # Keep kernel parameters clean
   boot.kernelParams = [
     # Other kernel parameters can stay here
   ];
