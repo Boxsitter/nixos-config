@@ -385,3 +385,15 @@ function reloc
         end
     end
 end
+
+# Updates /etc/nixos to the latest state from its GitHub repo and rebuilds the system using the flake
+function nixos-update
+    # Pull latest changes from the GitHub repo in /etc/nixos
+    echo (set_color -u '#92d8ff')Pulling latest changes from GitHub in /etc/nixos...(set_color normal)
+    pushd /etc/nixos
+    sudo git pull
+    popd
+    echo (set_color -u '#92d8ff')Rebuilding NixOS with flake...(set_color normal)
+    sudo nixos-rebuild switch --flake /etc/nixos#
+    echo (set_color green)NixOS update complete!(set_color normal)
+end
