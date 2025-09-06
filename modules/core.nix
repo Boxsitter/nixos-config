@@ -7,6 +7,19 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
+  # GRUB bootloader configuration for dual-boot
+  boot.loader = {
+    grub = {
+      enable = true;
+      device = "nodev";
+      efiSupport = true;
+      useOSProber = true;  # This detects Windows
+      default = "saved";   # Remember last choice, or set to 1 for Windows default
+      timeout = 10;        # 10 seconds to choose
+    };
+    efi.canTouchEfiVariables = true;
+  };
+
   # Configure console with a modern font and Catppuccin theme
   console = {
     # Use Terminus font which is a standard, reliable console font
@@ -26,6 +39,18 @@
   ];
 
   networking.networkmanager.enable = true;
+
+  # Intel WiFi driver support
+  hardware.enableRedistributableFirmware = true;
+  hardware.firmware = with pkgs; [
+    linux-firmware
+  ];
+  
+  # Enable Intel WiFi drivers
+  boot.kernelModules = [ "iwlwifi" ];
+  
+  # Intel WiFi firmware and drivers
+  hardware.enableAllFirmware = true;
 
   hardware.nvidia = {
     open = false;
@@ -60,5 +85,7 @@
 
   environment.systemPackages = with pkgs; [
     git nano wget pciutils usbutils fish neofetch eza starship gcc mono jdk python3 racket bc
+    # Add os-prober for detecting other operating systems
+    os-prober
   ];
 }
