@@ -4,7 +4,7 @@
 {
   # Install JetBrains Mono Nerd Font
   fonts.packages = [
-    pkgs.nerd-fonts.jetBrainsMono
+    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   # Just install Kitty system-wide

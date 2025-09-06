@@ -38,6 +38,8 @@
     # Other kernel parameters can stay here
   ];
 
+  # Set hostname - change this to your preferred hostname
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
   # Intel WiFi driver support
@@ -52,6 +54,14 @@
   # Intel WiFi firmware and drivers
   hardware.enableAllFirmware = true;
 
+  # Graphics drivers configuration
+  services.xserver.videoDrivers = [ "nvidia" ]; # Change to "amdgpu" for AMD or remove for Intel integrated
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # For 32-bit applications
+  };
+
+  # NVIDIA configuration (comment out if not using NVIDIA)
   hardware.nvidia = {
     open = false;
     modesetting.enable = true;
@@ -70,10 +80,11 @@
     home = "/home/leyton";
     extraGroups = [ "wheel" "networkmanager" "video" "input" ];
     shell = pkgs.fish;
-    initialPassword = "7574";
   };
 
+  # Security configuration
   security.sudo.wheelNeedsPassword = true;
+  security.polkit.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
@@ -84,8 +95,21 @@
   };
 
   environment.systemPackages = with pkgs; [
-    git nano wget pciutils usbutils fish neofetch eza starship gcc mono jdk python3 racket bc
-    # Add os-prober for detecting other operating systems
-    os-prober
+    # Core system tools
+    git nano wget curl pciutils usbutils lshw htop tree
+    
+    # Shell and terminal
+    fish neofetch eza starship
+    
+    # Development tools
+    gcc mono jdk python3 racket bc
+    
+    # System utilities
+    os-prober   # For detecting other operating systems in dual-boot
+    ntfs3g      # For NTFS support (Windows partitions)
+    unzip zip   # Archive utilities
+    
+    # Network tools
+    networkmanagerapplet
   ];
 }

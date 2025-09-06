@@ -1,6 +1,6 @@
 # ./flake.nix
 {
-  description = "A NixOS configuration for Hyprland";
+  description = "A NixOS configuration for KDE Plasma";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -8,6 +8,7 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
+    # Replace "nixos" with your actual hostname
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
